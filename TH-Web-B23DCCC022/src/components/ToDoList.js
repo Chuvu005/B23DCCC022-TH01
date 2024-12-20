@@ -1,43 +1,43 @@
 import React, { useState } from "react";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]); // Danh sách các công việc
-  const [newTodo, setNewTodo] = useState(""); // Công việc mới
-  const [isEditing, setIsEditing] = useState(false); // Trạng thái chỉnh sửa
-  const [currentTodo, setCurrentTodo] = useState(null); // Công việc hiện tại được chỉnh sửa
+  const [todos, setTodos] = useState([]); 
+  const [newTodo, setNewTodo] = useState(""); 
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentTodo, setCurrentTodo] = useState(null); 
 
   const handleAddTodo = () => {
-    if (!newTodo) return; // Nếu không có công việc mới, không làm gì
+    if (!newTodo) return; 
 
-    setTodos([...todos, { text: newTodo, completed: false }]); // Thêm công việc mới vào danh sách
-    setNewTodo(""); // Xóa nội dung ô input sau khi thêm
+    setTodos([...todos, { text: newTodo, completed: false }]); 
+    setNewTodo(""); 
   };
 
   const handleToggleComplete = (index) => {
     const updatedTodos = todos.map((todo, i) =>
       i === index ? { ...todo, completed: !todo.completed } : todo
     );
-    setTodos(updatedTodos); // Đánh dấu hoàn thành công việc
+    setTodos(updatedTodos); 
   };
 
   const handleDeleteTodo = (index) => {
-    const updatedTodos = todos.filter((_, i) => i !== index); // Xóa công việc khỏi danh sách
+    const updatedTodos = todos.filter((_, i) => i !== index); 
     setTodos(updatedTodos);
   };
 
   const handleEditTodo = (index) => {
-    setIsEditing(true); // Kích hoạt chế độ chỉnh sửa
-    setCurrentTodo({ index, text: todos[index].text }); // Lưu lại công việc hiện tại đang chỉnh sửa
-    setNewTodo(todos[index].text); // Điền nội dung công việc vào ô input
+    setIsEditing(true); 
+    setCurrentTodo({ index, text: todos[index].text }); 
+    setNewTodo(todos[index].text); 
   };
 
   const handleSaveTodo = () => {
     const updatedTodos = todos.map((todo, i) =>
       i === currentTodo.index ? { ...todo, text: newTodo } : todo
     );
-    setTodos(updatedTodos); // Lưu lại công việc đã chỉnh sửa
-    setIsEditing(false); // Tắt chế độ chỉnh sửa
-    setNewTodo(""); // Xóa nội dung ô input sau khi lưu
+    setTodos(updatedTodos);
+    setIsEditing(false);
+    setNewTodo("");
   };
 
   return (
@@ -46,7 +46,7 @@ const TodoList = () => {
       <input
         type="text"
         value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)} // Cập nhật giá trị của công việc mới
+        onChange={(e) => setNewTodo(e.target.value)} 
         placeholder="Nội dung công việc"
       />
       <button onClick={isEditing ? handleSaveTodo : handleAddTodo}>
